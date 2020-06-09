@@ -89,6 +89,11 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Capacity Range 1", "Capacity Range 2", "Capacity Range 3", "Capacity Range 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jRadioButton1.setText("jRadioButton1");
 
@@ -300,6 +305,10 @@ public class MainForm extends javax.swing.JFrame {
         dispose();
         new MarriageHallAdd().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
