@@ -37,9 +37,7 @@ public class DashboardSeller extends Dashboard {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashboardSeller().setVisible(true);
-                
-
+                new DashboardSeller().setVisible(true);    
             }
         });
     }
