@@ -14,12 +14,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
+
 /**
  *
  * @author s
  */
 public class MainForm extends javax.swing.JFrame {
 
+    public static ArrayList<User> userData = new ArrayList<User>();
+    public static User currentUser;
     private ArrayList<MarriageHall> tempMarriageHall;
     
     /**
@@ -74,6 +78,11 @@ public class MainForm extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
         buttonGroup1.add(jRadioButton3);
+        
+        userData.add(new User("asd", "pass", "Customer", "con",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\3.jpg"))); 
+        userData.add(new User("asd1", "pass", "Customer", "con",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\3.jpg"))); 
+        userData.add(new User("asd1", "pass", "Customer", "con",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\3.jpg"))); 
+        
     }
 
     /**
@@ -706,8 +715,8 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         dispose();
-         new DashboardSeller().setVisible(true);               
+        dispose();
+        new MainForm().setVisible(true);               
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

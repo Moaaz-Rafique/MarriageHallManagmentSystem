@@ -160,11 +160,14 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="124" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblLoginImage" min="-2" pref="300" max="-2" attributes="0"/>
+                                  <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                              </Group>
                               <Component id="txtName" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
-                              <Component id="lblLoginImage" alignment="1" min="-2" pref="320" max="-2" attributes="0"/>
                               <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jRadioButtonSeller" min="-2" pref="149" max="-2" attributes="0"/>
@@ -175,11 +178,13 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lblName" alignment="1" min="-2" pref="108" max="-2" attributes="0"/>
                                           <Component id="lblPassword" alignment="1" min="-2" pref="108" max="-2" attributes="0"/>
+                                          <Component id="lblContact" alignment="1" min="-2" pref="108" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="txtPassword" min="-2" pref="194" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="txtContact" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="206" pref="206" max="-2" attributes="0"/>
                       </Group>
@@ -188,12 +193,17 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                          <Component id="lblLoginImage" min="-2" pref="319" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblLoginImage" min="-2" pref="257" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblName" max="32767" attributes="0"/>
                               <Component id="txtName" min="-2" pref="38" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lblContact" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtContact" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -258,6 +268,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="jLabel4"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblLoginImageMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButtonSeller">
                   <Properties>
@@ -270,6 +283,22 @@
                 <Component class="javax.swing.JRadioButton" name="jRadioButtonCustomer">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="SignUp As a Consumer"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtContact">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection component="lblName" name="font" type="property"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="0300-1343411"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblContact">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe Print" size="18" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Contact"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -292,6 +321,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sign Up"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSignUpActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
