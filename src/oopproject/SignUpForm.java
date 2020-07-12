@@ -19,6 +19,7 @@ public class SignUpForm extends javax.swing.JFrame {
      * Creates new form SignUpForm
      */
     private User user = new User();
+    
     public SignUpForm() {
         initComponents();
         buttonGroup1.add(jRadioButtonSeller);
@@ -296,6 +297,8 @@ public class SignUpForm extends javax.swing.JFrame {
         System.out.println(user.getContact());
         System.out.println(user.getUserType());
         userData.add(user);
+        CRUDOperations c = new CRUDOperations();
+        c.addUser(user);
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     /**

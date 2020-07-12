@@ -26,8 +26,8 @@ public class MarriageHallForm extends javax.swing.JFrame {
     MarriageHallForm(MarriageHall mH) {
         initComponents();
         setPanelMarriageHall(name, price, capacity, image, mH);
-        name.setText(mH.GetName());
-        price.setText(mH.GetPrice());
+        name.setText(mH.getName());
+        price.setText(mH.getPrice());
         capacity.setText(Integer.toString(mH.getCapacityPeople()));
 
     }

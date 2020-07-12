@@ -16,12 +16,13 @@ import javax.swing.JOptionPane;
 
 public class MarriageHall {
 
-    private String name, price, Location, date;
+    private String name, price, location, date;
     private int capacityPeople;
     private ArrayList<String> dates = new ArrayList<>();
     private File imgP;
     private BufferedImage img = null;
-
+    private User seller,consumer;
+    private String contact = "COnatct";
     public File getImgP() {
         return imgP;
     }
@@ -39,12 +40,15 @@ public class MarriageHall {
         this.dates.add(" ");
     }
 
-    public MarriageHall(String Name, String Price, int CapacityP, int CapacityS, String D, File imgP) {
+    public MarriageHall(String Name, String Price, int CapacityP,String Location,String contact, String D, File imgP) {
 
         this.name = Name;
         this.price = Price;
         this.capacityPeople = CapacityP;
         this.imgP = imgP;
+        this.location = Location;
+        this.date = D;
+        this.contact = contact;
         try {
             img = ImageIO.read(imgP);
         } catch (IOException ex) {
@@ -75,130 +79,71 @@ public class MarriageHall {
         this.img = img;
     }
 
-    public void SetName(String N) {
-        this.name = N;
+    public String getName() {
+        return name;
     }
 
-    public void SetPrice(String P) {
-        this.price = P;
+    public String getPrice() {
+        return price;
     }
 
-    public void SetCapacityPeople(int CP) {
-        this.capacityPeople = CP;
+    public String getLocation() {
+        return location;
     }
 
-    public void SetLocation(String L) {
-        this.Location = L;
+    public String getDate() {
+        return date;
     }
 
-    public void SetDate(String D) {
-        this.dates.add(D);
-    }
-
-    public String GetName() {
-        return this.name;
-    }
-
-    public String GetPrice() {
-        return this.price;
-    }
-
-    public int GetCapacityPeople() {
-        return this.capacityPeople;
-    }
-
-    public String GetLocation() {
-        return this.Location;
-    }
-
-    public ArrayList<String> GetDate() {
+    public ArrayList<String> getDates() {
         return dates;
     }
 
-    ConnectionToDB con = new ConnectionToDB();
-    Connection con1 = con.EstablishConnection();
-    Statement s = null;
-    PreparedStatement ps = null;
-    ResultSet res = null;
-
-    public boolean addDate(String D) {
-        boolean b = false;
-        String sql = "insert into Halls(Date Fixed)values('" + D + "')";
-
-        try {
-            s = con1.createStatement();
-            int res = s.executeUpdate(sql);
-
-            if (res > 0) {
-                JOptionPane.showMessageDialog(null, "Data Inserted!");
-                b = true;
-            } else {
-                b = false;
-                JOptionPane.showMessageDialog(null, "Error");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-        return b;
+    public User getSeller() {
+        return seller;
     }
 
-    public boolean searchPrice(String P) {
-        String loginString = "select * from Halls where Price = '" + P + "' ";
-        boolean b = false;
+    public User getConsumer() {
+        return consumer;
+    }    
 
-        try {
-            ps = con1.prepareStatement(loginString);
-            res = ps.executeQuery();
-
-            while (res.next()) {
-                name = res.getString("Name");
-                Location = res.getString("Location");
-                capacityPeople = res.getInt("People Capacity");
-                date = res.getString("Date Fixed");
-                b = true;
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-        return b;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public boolean searchPeopleCapacity(int PC) {
-        String loginString = "select * from Halls where People Capacity = '" + PC + "' ";
-        boolean b = false;
-
-        try {
-            ps = con1.prepareStatement(loginString);
-            res = ps.executeQuery();
-
-            while (res.next()) {
-                name = res.getString("Name");
-                Location = res.getString("Location");
-                price = res.getString("Price");
-                date = res.getString("Date Fixed");
-                b = true;
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-        return b;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public boolean UpdateUser(int ID, String N, String L, String P, int PC, String D) {
-        boolean b = false;
-        String sql = "Update Halls set (Name,Location,Price,People Capacity,Date Fixed)=('" + N + "','" + L + "','" + P + "','" + PC + "','" + D + "') where ID='" + ID + "'";
-        try {
-            s = con1.createStatement();
-            int rs = s.executeUpdate(sql);
-            if (rs > 0) {
-                b = true;
-            } else {
-                b = false;
-            }
+    public void setLocation(String Location) {
+        this.location = Location;
+    }
 
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-        return b;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setCapacityPeople(int capacityPeople) {
+        this.capacityPeople = capacityPeople;
+    }
+
+    public void setDates(ArrayList<String> dates) {
+        this.dates = dates;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
+    }
+
+    public void setConsumer(User consumer) {
+        this.consumer = consumer;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

@@ -24,32 +24,32 @@ public class MainForm extends javax.swing.JFrame {
 
     public static ArrayList<User> userData = new ArrayList<User>();
     public static User currentUser;
-    private ArrayList<MarriageHall> tempMarriageHall;
+    public static ArrayList<MarriageHall> tempMarriageHall;
     
     /**
      * Creates new form MainForm
      */
     public static void setPanelMarriageHall(JLabel name, JLabel price, JLabel capacity, JLabel image,MarriageHall mH){
         try{
-            name.setText(mH.GetName());
+            name.setText(mH.getName());
         
-        price.setText(mH.GetPrice());
+        price.setText(mH.getPrice());
         capacity.setText(Integer.toString(mH.getCapacityPeople()));
         image.setIcon(new ImageIcon(mH.getImg().getScaledInstance(image.getWidth(), image.getHeight(),
             Image.SCALE_AREA_AVERAGING)));
         
         }
         catch(Exception e){
-            System.out.println(mH.GetName());
+            System.out.println(mH.getName());
             System.out.println(e);
         }
     }
     public static void setPanelMarriageHall1(JTextField name, JTextField price, JTextField capacity, JLabel image,MarriageHall mH){
         try{
-            mH.SetName(name.getText());
+            mH.setName(name.getText());
         
-        mH.SetPrice(price.getText());
-        mH.SetCapacityPeople(Integer.parseInt(capacity.getText()));
+        mH.setPrice(price.getText());
+        mH.setCapacityPeople(Integer.parseInt(capacity.getText()));
         image.setIcon(new ImageIcon(mH.getImg().getScaledInstance(image.getWidth(), image.getHeight(),
             Image.SCALE_AREA_AVERAGING)));
         
@@ -62,13 +62,13 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         tempMarriageHall = new ArrayList<MarriageHall>();
         this.setResizable(false);
-        tempMarriageHall.add(new MarriageHall("Name",  "Price",  000, 000, "Date", new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\login.png"))); 
-        tempMarriageHall.add(new MarriageHall("Name1", "Price1", 100, 100, "Date1",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\3.jpg"))); 
-        tempMarriageHall.add(new MarriageHall("Name2", "Price2", 200, 200, "Date2",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\2.jpg"))); 
-        tempMarriageHall.add(new MarriageHall("Name3", "Price3", 300, 300, "Date3",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\2.jpg"))); 
-        tempMarriageHall.add(new MarriageHall("Name4", "Price4", 400, 400, "Date4",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\1.jpg"))); 
-        tempMarriageHall.add(new MarriageHall("Name5", "Price5", 500, 500, "Date5",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\3.jpg"))); 
-        
+        CRUDOperations c = new CRUDOperations();
+        for (int i = 1; i <= c.countRows("Hall"); i++) {
+            tempMarriageHall.add(c.fetchNarriageHall(i));
+        }
+        for (int i = 0; i <= c.countRows("User"); i++) {
+            userData.add(c.fetchUser(i));
+        }
         setPanelMarriageHall(name, price, capacity, imgMH, tempMarriageHall.get(0));
         setPanelMarriageHall(name1, price1, capacity1, imgMH1, tempMarriageHall.get(1));
         setPanelMarriageHall(name4, price4, capacity4, imgMH3, tempMarriageHall.get(2));   
@@ -79,9 +79,9 @@ public class MainForm extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton2);
         buttonGroup1.add(jRadioButton3);
         
-        userData.add(new User("asd", "pass", "Customer", "con",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\3.jpg"))); 
-        userData.add(new User("asd1", "pass", "Customer", "con",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\3.jpg"))); 
-        userData.add(new User("asd1", "pass", "Customer", "con",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\3.jpg"))); 
+        
+        
+        System.out.println(c.fetchNarriageHall(3).getName());
         
     }
 
@@ -806,6 +806,7 @@ public class MainForm extends javax.swing.JFrame {
 
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
