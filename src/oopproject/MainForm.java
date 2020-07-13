@@ -24,7 +24,7 @@ public class MainForm extends javax.swing.JFrame {
 
     public static ArrayList<User> userData = new ArrayList<User>();
     public static User currentUser;
-    public static ArrayList<MarriageHall> tempMarriageHall;
+    public static ArrayList<MarriageHall> tempMarriageHall = new ArrayList<>();
     
     /**
      * Creates new form MainForm
@@ -60,15 +60,14 @@ public class MainForm extends javax.swing.JFrame {
     }
     public MainForm() {
         initComponents();
-        tempMarriageHall = new ArrayList<MarriageHall>();
         this.setResizable(false);
         CRUDOperations c = new CRUDOperations();
-        for (int i = 1; i <= c.countRows("Hall"); i++) {
-            tempMarriageHall.add(c.fetchNarriageHall(i));
-        }
-        for (int i = 0; i <= c.countRows("User"); i++) {
-            userData.add(c.fetchUser(i));
-        }
+        
+        tempMarriageHall.addAll(c.fetchNarriageHall());
+        
+        tempMarriageHall.add(new MarriageHall());
+        userData.addAll(c.fetchUser());
+        
         setPanelMarriageHall(name, price, capacity, imgMH, tempMarriageHall.get(0));
         setPanelMarriageHall(name1, price1, capacity1, imgMH1, tempMarriageHall.get(1));
         setPanelMarriageHall(name4, price4, capacity4, imgMH3, tempMarriageHall.get(2));   
@@ -80,11 +79,7 @@ public class MainForm extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton3);
         
         
-        
-        System.out.println(c.fetchNarriageHall(3).getName());
-        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

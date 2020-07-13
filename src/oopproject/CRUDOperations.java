@@ -7,6 +7,7 @@ package oopproject;
 
 import java.io.File;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -24,17 +25,17 @@ public class CRUDOperations {
     ResultSet res = null;
     String name, pwd;
 
-    public MarriageHall fetchNarriageHall(int id) {
-        MarriageHall m = null;
-        String sql = "select * from Hall where ID = '" + id + "' ";
+    public ArrayList<MarriageHall> fetchNarriageHall() {
+        ArrayList<MarriageHall> m = new ArrayList<>();
+        String sql = "select * from Hall";
 
         try {
             pstmt = con_obj.prepareStatement(sql);
             res = pstmt.executeQuery();
 
             while (res.next()) {
-                m = new MarriageHall(res.getString("Name"), res.getString("Price"), res.getInt("Capacity"),
-                        res.getString("Location"), res.getString("Contact"), res.getString("Date"), new File(res.getString("Image")));
+                m.add(new MarriageHall(res.getString("Name"), res.getString("Price"), res.getInt("Capacity"),
+                        res.getString("Location"), res.getString("Contact"), res.getString("Date"), new File(res.getString("Image"))));
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -57,31 +58,33 @@ public class CRUDOperations {
                 + m.getImgP().getAbsolutePath() + "')";
         try {
             stmt = con_obj.createStatement();// to convert above string into compatible sql/database  query
-
+            
             int res = stmt.executeUpdate(sql);// after excecuting above query the number of record effects is returned so if not 0 means rec is added
+            
             if (res > 0) {
                 b = true;
             } else {
                 b = false;
             }
-
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex); // catching exception in case of expcetion
+            System.out.println(ex);
         }
         return b;
     }
 
-    public User fetchUser(int id) {
-        User m = null;
-        String sql = "select * from User where ID = '" + id + "' ";
+    public ArrayList<User> fetchUser() {
+        ArrayList<User> m = new ArrayList<>();
+        String sql = "select * from User";
 
         try {
             pstmt = con_obj.prepareStatement(sql);
             res = pstmt.executeQuery();
 
             while (res.next()) {
-                m = new User(res.getString("Name"), res.getString("Password"),
-                        res.getString("Type"), res.getString("Contact"), new File(res.getString("Image")));
+                m.add(new User(res.getString("Name"), res.getString("Password"),
+                        res.getString("Type"), res.getString("Contact"), new File(res.getString("Image"))));
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -116,16 +119,4 @@ public class CRUDOperations {
         return b;
     }
 
-    public int countRows(String table) {
-        String sql = "select count(*) from Hall ";
-        int rows = 0;    
-        try {
-            pstmt = con_obj.prepareStatement(sql);
-            res = pstmt.executeQuery();
-            rows = res.getInt(1);
-        } catch (SQLException ex) {
-            Logger.getLogger(CRUDOperations.class.getName()).log(Level.SEVERE, null, ex);
-        }       
-        return rows;
-    }
 }

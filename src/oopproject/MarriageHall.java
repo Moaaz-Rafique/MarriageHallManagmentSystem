@@ -11,9 +11,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import java.sql.*;
-import javax.swing.JOptionPane;
-
 public class MarriageHall {
 
     private String name, price, location, date;
@@ -35,9 +32,11 @@ public class MarriageHall {
         this.name = " ";
         this.price = "";
         this.capacityPeople = 0;
+        this.contact = " ";
+        this.location = " ";
+        this.date = "No date set";
         this.imgP = null;
-
-        this.dates.add(" ");
+        this.imgP = new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\login.png");
     }
 
     public MarriageHall(String Name, String Price, int CapacityP,String Location,String contact, String D, File imgP) {
