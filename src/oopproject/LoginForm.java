@@ -6,6 +6,7 @@
 package oopproject;
 
 import javax.swing.JOptionPane;
+import static oopproject.MainForm.login;
 import static oopproject.MainForm.userData;
 
 /**
@@ -217,6 +218,7 @@ public class LoginForm extends javax.swing.JFrame {
                     
                     found = true;
                     MainForm.currentUser = user;
+                    login = true; 
                     break;
                     
                 }                

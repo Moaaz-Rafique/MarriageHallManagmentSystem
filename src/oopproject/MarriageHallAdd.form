@@ -280,6 +280,9 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="price">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection component="jLabel2" name="font" type="property"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="30,000"/>
                   </Properties>
                   <Events>
@@ -288,6 +291,9 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="capacity">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection component="jLabel2" name="font" type="property"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="2000"/>
                   </Properties>
                 </Component>
@@ -301,6 +307,9 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="name">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection component="jLabel2" name="font" type="property"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Kings Lawn"/>
                   </Properties>
                   <Events>
@@ -309,6 +318,9 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtContact">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection component="jLabel2" name="font" type="property"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="03-------"/>
                   </Properties>
                 </Component>
@@ -322,6 +334,9 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtLocation">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection component="jLabel2" name="font" type="property"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Karachi"/>
                   </Properties>
                 </Component>

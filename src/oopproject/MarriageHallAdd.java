@@ -5,18 +5,7 @@
  */
 package oopproject;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import static oopproject.MainForm.setPanelMarriageHall;
 import static oopproject.MainForm.setPanelMarriageHall1;
 import static oopproject.MainForm.tempMarriageHall;
 
@@ -110,6 +99,7 @@ public class MarriageHallAdd extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         jLabel5.setText("Capacity");
 
+        price.setFont(jLabel2.getFont());
         price.setText("30,000");
         price.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +107,7 @@ public class MarriageHallAdd extends javax.swing.JFrame {
             }
         });
 
+        capacity.setFont(jLabel2.getFont());
         capacity.setText("2000");
 
         addHall.setText("Add the Hall");
@@ -126,6 +117,7 @@ public class MarriageHallAdd extends javax.swing.JFrame {
             }
         });
 
+        name.setFont(jLabel2.getFont());
         name.setText("Kings Lawn");
         name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,11 +125,13 @@ public class MarriageHallAdd extends javax.swing.JFrame {
             }
         });
 
+        txtContact.setFont(jLabel2.getFont());
         txtContact.setText("03-------");
 
         jLabel4.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         jLabel4.setText("Contact");
 
+        txtLocation.setFont(jLabel2.getFont());
         txtLocation.setText("Karachi");
 
         jLabel6.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
@@ -287,6 +281,8 @@ public class MarriageHallAdd extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        dispose();
+        new MainForm().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void imageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMouseClicked

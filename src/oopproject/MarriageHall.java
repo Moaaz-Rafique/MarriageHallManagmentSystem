@@ -14,12 +14,14 @@ import javax.swing.JLabel;
 public class MarriageHall {
 
     private String name, price, location, date;
-    private int capacityPeople;
+    private int id, capacityPeople;
     private ArrayList<String> dates = new ArrayList<>();
     private File imgP;
     private BufferedImage img = null;
-    private User seller,consumer;
+    private User seller;
     private String contact = "COnatct";
+    
+
     public File getImgP() {
         return imgP;
     }
@@ -29,6 +31,7 @@ public class MarriageHall {
     }
 
     MarriageHall() {
+        this.id = 0;
         this.name = " ";
         this.price = "";
         this.capacityPeople = 0;
@@ -55,6 +58,10 @@ public class MarriageHall {
         }
         this.dates.add(D);
     }
+    public MarriageHall(int id, String Name, String Price, int CapacityP,String Location,String contact, String D, File imgP) {
+         this(Name,  Price,  CapacityP, Location, contact, D, imgP);
+         this.id = id;
+    }
 
     public void setImageFromFile(JLabel label) {
         try {
@@ -65,7 +72,14 @@ public class MarriageHall {
         label.setIcon(new ImageIcon(getImg().getScaledInstance(label.getWidth(), label.getHeight(),
                 Image.SCALE_AREA_AVERAGING)));
     }
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getCapacityPeople() {
         return capacityPeople;
     }
@@ -102,10 +116,6 @@ public class MarriageHall {
         return seller;
     }
 
-    public User getConsumer() {
-        return consumer;
-    }    
-
     public void setName(String name) {
         this.name = name;
     }
@@ -132,10 +142,6 @@ public class MarriageHall {
 
     public void setSeller(User seller) {
         this.seller = seller;
-    }
-
-    public void setConsumer(User consumer) {
-        this.consumer = consumer;
     }
 
     public String getContact() {

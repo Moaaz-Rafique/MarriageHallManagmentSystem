@@ -22,8 +22,6 @@ public class SignUpForm extends javax.swing.JFrame {
     
     public SignUpForm() {
         initComponents();
-        buttonGroup1.add(jRadioButtonSeller);
-        buttonGroup1.add(jRadioButtonCustomer);
     }
 
     /**
@@ -46,8 +44,6 @@ public class SignUpForm extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
         lblLoginImage = new javax.swing.JLabel();
-        jRadioButtonSeller = new javax.swing.JRadioButton();
-        jRadioButtonCustomer = new javax.swing.JRadioButton();
         txtContact = new javax.swing.JTextField();
         lblContact = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
@@ -105,17 +101,8 @@ public class SignUpForm extends javax.swing.JFrame {
             }
         });
 
-        jRadioButtonSeller.setText("SignUp As a Seller");
-        jRadioButtonSeller.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonSellerActionPerformed(evt);
-            }
-        });
-
-        jRadioButtonCustomer.setText("SignUp As a Consumer");
-
         txtContact.setFont(lblName.getFont());
-        txtContact.setText("0300-1343411");
+        txtContact.setText("0321-8394674");
 
         lblContact.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         lblContact.setText("Contact");
@@ -131,18 +118,13 @@ public class SignUpForm extends javax.swing.JFrame {
                         .addComponent(lblLoginImage, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jRadioButtonSeller, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jRadioButtonCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblContact, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblContact, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(206, 206, 206))
         );
@@ -163,14 +145,7 @@ public class SignUpForm extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtPassword)
                     .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jRadioButtonSeller, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButtonCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         btnLogin.setFont(lblName.getFont());
@@ -215,8 +190,8 @@ public class SignUpForm extends javax.swing.JFrame {
                         .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -266,10 +241,6 @@ public class SignUpForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
-    private void jRadioButtonSellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonSellerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonSellerActionPerformed
-
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -291,7 +262,6 @@ public class SignUpForm extends javax.swing.JFrame {
         user.setName(this.txtName.getText());
         user.setContact(this.txtContact.getText());
         user.setPassword(this.txtPassword.getText());
-        user.setUserType(userType());
         System.out.println(user.getName());
         System.out.println(user.getPassword());
         System.out.println(user.getContact());
@@ -345,8 +315,6 @@ public class SignUpForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButtonCustomer;
-    private javax.swing.JRadioButton jRadioButtonSeller;
     private javax.swing.JLabel lblContact;
     private javax.swing.JLabel lblLoginImage;
     private javax.swing.JLabel lblName;
@@ -355,13 +323,4 @@ public class SignUpForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
-
-    private String userType() {
-        if(jRadioButtonCustomer.isSelected())
-            return "Customer";
-        else if(jRadioButtonSeller.isSelected())
-        return "Seller";
-        else 
-            return null;
-    }
 }

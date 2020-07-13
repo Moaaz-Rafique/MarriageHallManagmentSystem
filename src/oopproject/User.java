@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class User {
+    private int id;
     private String name;
     private String password;
     private String userType;
@@ -19,12 +20,12 @@ public class User {
     private BufferedImage img = null;
 
     public User() {
+        
     }
 
-    public User(String name, String password, String userType, String contact, File imgP) {
+    public User(String name, String password,String contact, File imgP) {
         this.name = name;
         this.password = password;
-        this.userType = userType;
         this.imgP = imgP;
         this.contact = contact;
         try {
@@ -32,6 +33,17 @@ public class User {
         } catch (IOException ex) {
             Logger.getLogger(MarriageHall.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public User(int id, String name, String password,String contact, File imgP) {
+        this(name, password, contact, imgP);
+        this.id = id;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     

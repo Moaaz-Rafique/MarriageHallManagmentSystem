@@ -8,8 +8,6 @@ package oopproject;
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,7 +32,7 @@ public class CRUDOperations {
             res = pstmt.executeQuery();
 
             while (res.next()) {
-                m.add(new MarriageHall(res.getString("Name"), res.getString("Price"), res.getInt("Capacity"),
+                m.add(new MarriageHall(res.getInt("ID") ,res.getString("Name"), res.getString("Price"), res.getInt("Capacity"),
                         res.getString("Location"), res.getString("Contact"), res.getString("Date"), new File(res.getString("Image"))));
             }
         } catch (Exception ex) {
@@ -83,8 +81,7 @@ public class CRUDOperations {
             res = pstmt.executeQuery();
 
             while (res.next()) {
-                m.add(new User(res.getString("Name"), res.getString("Password"),
-                        res.getString("Type"), res.getString("Contact"), new File(res.getString("Image"))));
+                m.add(new User(res.getInt("ID") ,res.getString("Name"), res.getString("Password"), res.getString("Contact"), new File(res.getString("Image"))));
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -100,7 +97,6 @@ public class CRUDOperations {
         String sql = "insert into User(Name,Password,Type,Contact, Image) values ('"
                 + u.getName() + "','"
                 + u.getPassword() + "','"
-                + u.getUserType() + "','"
                 + u.getContact() + "','"
                 + u.getImgP().getAbsolutePath() + "')";
         try {
@@ -116,6 +112,27 @@ public class CRUDOperations {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex); // catching exception in case of expcetion
         }
+        return b;
+    }
+
+    public boolean addbooking(User currentUser, MarriageHall m , String date) {
+        boolean b = false;
+        String sql = "insert into TimeTable(Hall, Buyer, Date) values ('"
+                + currentUser.getId() + "','"
+                + m.getId() + "','"
+                + date+ "')";
+        try {
+            stmt = con_obj.createStatement();// to convert above string into compatible sql/database  query
+            int res = stmt.executeUpdate(sql);// after excecuting above query the number of record effects is returned so if not 0 means rec is added           
+            if (res > 0) {
+                b = true;
+            } else {
+                b = false;
+            }
+            System.out.println("aaa");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex); // catching exception in case of expcetion
+        }        
         return b;
     }
 

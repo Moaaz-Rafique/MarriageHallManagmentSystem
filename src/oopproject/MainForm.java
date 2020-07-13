@@ -1,9 +1,11 @@
+package oopproject;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oopproject;
+
 
 import java.awt.Image;
 import java.io.File;
@@ -25,7 +27,9 @@ public class MainForm extends javax.swing.JFrame {
     public static ArrayList<User> userData = new ArrayList<User>();
     public static User currentUser;
     public static ArrayList<MarriageHall> tempMarriageHall = new ArrayList<>();
-    
+    public static int page = 0;
+    public static boolean login = false;
+
     /**
      * Creates new form MainForm
      */
@@ -68,12 +72,12 @@ public class MainForm extends javax.swing.JFrame {
         tempMarriageHall.add(new MarriageHall());
         userData.addAll(c.fetchUser());
         
-        setPanelMarriageHall(name, price, capacity, imgMH, tempMarriageHall.get(0));
-        setPanelMarriageHall(name1, price1, capacity1, imgMH1, tempMarriageHall.get(1));
-        setPanelMarriageHall(name4, price4, capacity4, imgMH3, tempMarriageHall.get(2));   
-        setPanelMarriageHall(name9, price9, capacity9, imgMH6, tempMarriageHall.get(3));     
-        setPanelMarriageHall(name12, price12, capacity12, imgMH9, tempMarriageHall.get(4));
-        setPanelMarriageHall(name13, price13, capacity13, imgMH10, tempMarriageHall.get(5));
+        setPanelMarriageHall(name, price, capacity, imgMH, tempMarriageHall.get(0+page));
+        setPanelMarriageHall(name1, price1, capacity1, imgMH1, tempMarriageHall.get(1+page));
+        setPanelMarriageHall(name4, price4, capacity4, imgMH3, tempMarriageHall.get(2+page));   
+        setPanelMarriageHall(name9, price9, capacity9, imgMH6, tempMarriageHall.get(3+page));     
+        setPanelMarriageHall(name12, price12, capacity12, imgMH9, tempMarriageHall.get(4+page));
+        setPanelMarriageHall(name13, price13, capacity13, imgMH10, tempMarriageHall.get(5+page));
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
         buttonGroup1.add(jRadioButton3);
@@ -739,32 +743,32 @@ public class MainForm extends javax.swing.JFrame {
     private void pnlMarriageHall1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMarriageHall1MouseClicked
         // TODO add your handling code here:
         dispose();
-        new MarriageHallForm(tempMarriageHall.get(1)).setVisible(true);
+        new MarriageHallForm(tempMarriageHall.get(1+page)).setVisible(true);
         
     }//GEN-LAST:event_pnlMarriageHall1MouseClicked
 
     private void pnlMarriageHall3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMarriageHall3MouseClicked
         // TODO add your handling code here:
         dispose();
-        new MarriageHallForm(tempMarriageHall.get(2)).setVisible(true);
+        new MarriageHallForm(tempMarriageHall.get(2+page)).setVisible(true);
     }//GEN-LAST:event_pnlMarriageHall3MouseClicked
 
     private void pnlMarriageHall6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMarriageHall6MouseClicked
         // TODO add your handling code here:
         dispose();
-        new MarriageHallForm(tempMarriageHall.get(3)).setVisible(true);
+        new MarriageHallForm(tempMarriageHall.get(3+page)).setVisible(true);
     }//GEN-LAST:event_pnlMarriageHall6MouseClicked
 
     private void pnlMarriageHall9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMarriageHall9MouseClicked
         // TODO add your handling code here:
         dispose();
-        new MarriageHallForm(tempMarriageHall.get(4)).setVisible(true);
+        new MarriageHallForm(tempMarriageHall.get(4+page)).setVisible(true);
     }//GEN-LAST:event_pnlMarriageHall9MouseClicked
 
     private void pnlMarriageHall10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMarriageHall10MouseClicked
         // TODO add your handling code here:
         dispose();
-        new MarriageHallForm(tempMarriageHall.get(5)).setVisible(true);
+        new MarriageHallForm(tempMarriageHall.get(5+page)).setVisible(true);
     }//GEN-LAST:event_pnlMarriageHall10MouseClicked
 
     /**
@@ -808,28 +812,15 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel capacity;
     private javax.swing.JLabel capacity1;
-    private javax.swing.JLabel capacity10;
-    private javax.swing.JLabel capacity11;
     private javax.swing.JLabel capacity12;
     private javax.swing.JLabel capacity13;
-    private javax.swing.JLabel capacity2;
-    private javax.swing.JLabel capacity3;
     private javax.swing.JLabel capacity4;
-    private javax.swing.JLabel capacity5;
-    private javax.swing.JLabel capacity6;
-    private javax.swing.JLabel capacity7;
-    private javax.swing.JLabel capacity8;
     private javax.swing.JLabel capacity9;
     private javax.swing.JLabel imgMH;
     private javax.swing.JLabel imgMH1;
     private javax.swing.JLabel imgMH10;
-    private javax.swing.JLabel imgMH2;
     private javax.swing.JLabel imgMH3;
-    private javax.swing.JLabel imgMH4;
-    private javax.swing.JLabel imgMH5;
     private javax.swing.JLabel imgMH6;
-    private javax.swing.JLabel imgMH7;
-    private javax.swing.JLabel imgMH8;
     private javax.swing.JLabel imgMH9;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -839,40 +830,13 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
@@ -885,55 +849,31 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel name;
     private javax.swing.JLabel name1;
-    private javax.swing.JLabel name10;
-    private javax.swing.JLabel name11;
     private javax.swing.JLabel name12;
     private javax.swing.JLabel name13;
-    private javax.swing.JLabel name2;
-    private javax.swing.JLabel name3;
     private javax.swing.JLabel name4;
-    private javax.swing.JLabel name5;
-    private javax.swing.JLabel name6;
-    private javax.swing.JLabel name7;
-    private javax.swing.JLabel name8;
     private javax.swing.JLabel name9;
     private javax.swing.JButton nextPage;
     private javax.swing.JButton nextPage1;
     private javax.swing.JPanel pnlMarriageHall;
     private javax.swing.JPanel pnlMarriageHall1;
     private javax.swing.JPanel pnlMarriageHall10;
-    private javax.swing.JPanel pnlMarriageHall2;
     private javax.swing.JPanel pnlMarriageHall3;
-    private javax.swing.JPanel pnlMarriageHall4;
-    private javax.swing.JPanel pnlMarriageHall5;
     private javax.swing.JPanel pnlMarriageHall6;
-    private javax.swing.JPanel pnlMarriageHall7;
-    private javax.swing.JPanel pnlMarriageHall8;
     private javax.swing.JPanel pnlMarriageHall9;
     private javax.swing.JLabel price;
     private javax.swing.JLabel price1;
-    private javax.swing.JLabel price10;
-    private javax.swing.JLabel price11;
     private javax.swing.JLabel price12;
     private javax.swing.JLabel price13;
-    private javax.swing.JLabel price2;
-    private javax.swing.JLabel price3;
     private javax.swing.JLabel price4;
-    private javax.swing.JLabel price5;
-    private javax.swing.JLabel price6;
-    private javax.swing.JLabel price7;
-    private javax.swing.JLabel price8;
     private javax.swing.JLabel price9;
     // End of variables declaration//GEN-END:variables
 }

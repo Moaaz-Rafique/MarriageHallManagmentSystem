@@ -5,16 +5,19 @@
  */
 package oopproject;
 
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import static oopproject.MainForm.setPanelMarriageHall;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static oopproject.MainForm.*;
 
 /**
  *
  * @author s
  */
-public class MarriageHallForm extends javax.swing.JFrame {
+public class MarriageHallForm extends javax.swing.JFrame{
 
     /**
      * Creates new form MarriageHallForm
@@ -22,14 +25,16 @@ public class MarriageHallForm extends javax.swing.JFrame {
     public MarriageHallForm() {
         initComponents();
     }
-
+    private MarriageHall mH = new MarriageHall();
+    
     MarriageHallForm(MarriageHall mH) {
         initComponents();
         setPanelMarriageHall(name, price, capacity, image, mH);
         name.setText(mH.getName());
         price.setText(mH.getPrice());
         capacity.setText(Integer.toString(mH.getCapacityPeople()));
-
+        txtContact.setText(mH.getContact());
+        txtLocation.setText(mH.getLocation());
     }
 
     /**
@@ -56,10 +61,14 @@ public class MarriageHallForm extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
         price = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        description = new javax.swing.JTextArea();
         jButton4 = new javax.swing.JButton();
         capacity = new javax.swing.JLabel();
+        txtContact = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtLocation = new javax.swing.JLabel();
+        txtdate = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,10 +114,6 @@ public class MarriageHallForm extends javax.swing.JFrame {
         price.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         price.setText("50,000");
 
-        description.setColumns(20);
-        description.setRows(5);
-        jScrollPane1.setViewportView(description);
-
         jButton4.setText("Book this Hall");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +122,24 @@ public class MarriageHallForm extends javax.swing.JFrame {
         });
 
         capacity.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+
+        txtContact.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        txtContact.setText("213123");
+
+        jLabel4.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        jLabel4.setText("Contact");
+
+        jLabel6.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        jLabel6.setText("Location");
+
+        txtLocation.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        txtLocation.setText("Karachi");
+
+        txtdate.setFont(capacity.getFont());
+        txtdate.setText("dd/mm/yyyy");
+
+        jLabel7.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        jLabel7.setText("Date");
 
         javax.swing.GroupLayout MarriageHalllPanelLayout = new javax.swing.GroupLayout(MarriageHalllPanel);
         MarriageHalllPanel.setLayout(MarriageHalllPanelLayout);
@@ -128,32 +151,60 @@ public class MarriageHallForm extends javax.swing.JFrame {
                     .addGroup(MarriageHalllPanelLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE))
                     .addGroup(MarriageHalllPanelLayout.createSequentialGroup()
                         .addGroup(MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(price, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(MarriageHalllPanelLayout.createSequentialGroup()
                                 .addComponent(capacity, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))))
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(MarriageHalllPanelLayout.createSequentialGroup()
+                                .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
             .addGroup(MarriageHalllPanelLayout.createSequentialGroup()
-                .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1))
+                .addGroup(MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MarriageHalllPanelLayout.createSequentialGroup()
+                        .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(MarriageHalllPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(MarriageHalllPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtdate, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(MarriageHalllPanelLayout.createSequentialGroup()
+                        .addGap(336, 336, 336)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         MarriageHalllPanelLayout.setVerticalGroup(
             MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MarriageHalllPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(MarriageHalllPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtdate, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(MarriageHalllPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,6 +291,22 @@ public class MarriageHallForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if(login){            
+            CRUDOperations c = new CRUDOperations();
+            try {  
+                Date d=(Date) new SimpleDateFormat("dd/MM/yyyy").parse(txtdate.getText());
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Please Make sure you have entered a valid date in dd/MM/yyyy format");
+            }
+            c.addbooking(currentUser, mH, txtdate.getText());
+        }
+        else
+            JOptionPane.showMessageDialog(this, "Please Login to book the Hall");
+            
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -249,10 +316,6 @@ public class MarriageHallForm extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,7 +356,6 @@ public class MarriageHallForm extends javax.swing.JFrame {
     private javax.swing.JPanel MarriageHalllPanel;
     private javax.swing.JLabel capacity;
     private org.jdatepicker.impl.DateComponentFormatter dateComponentFormatter1;
-    private javax.swing.JTextArea description;
     private javax.swing.JLabel image;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -303,11 +365,16 @@ public class MarriageHallForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name;
     private javax.swing.JLabel price;
+    private javax.swing.JLabel txtContact;
+    private javax.swing.JLabel txtLocation;
+    private javax.swing.JTextField txtdate;
     // End of variables declaration//GEN-END:variables
 }
