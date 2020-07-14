@@ -34,8 +34,8 @@ public class CRUDOperations {
             res = pstmt.executeQuery();
 
             while (res.next()) {
-                m.add(new MarriageHall(res.getInt("ID") ,res.getString("Name"), res.getString("Price"), res.getInt("Capacity"),
-                        res.getString("Location"), res.getString("Contact"),  new File(res.getString("Image")), res.getInt("Seller")));
+                m.add(new MarriageHall(res.getInt("ID"), res.getString("Name"), res.getString("Price"), res.getInt("Capacity"),
+                        res.getString("Location"), res.getString("Contact"), new File(res.getString("Image")), res.getInt("Seller")));
                 //m.get(m.size()-1).setSeller(getUser(res.getInt("Seller")));
                 //getUser(res.getInt("Seller")).getMyMarriageHalls().add(m.get(m.size()-1));
             }
@@ -57,19 +57,18 @@ public class CRUDOperations {
                 + m.getLocation() + "','"
                 + m.getContact() + "','"
                 + m.getImgP().getAbsolutePath() + "','"
-                + currentUser.getId()+"')";
+                + currentUser.getId() + "')";
         try {
             stmt = con_obj.createStatement();// to convert above string into compatible sql/database  query
-            
+
             int res = stmt.executeUpdate(sql);// after excecuting above query the number of record effects is returned so if not 0 means rec is added
-            
+
             if (res > 0) {
                 b = true;
             } else {
                 b = false;
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex); // catching exception in case of expcetion
             System.out.println(ex);
         }
@@ -85,7 +84,7 @@ public class CRUDOperations {
             res = pstmt.executeQuery();
 
             while (res.next()) {
-                m.add(new User(res.getInt("ID") ,res.getString("Name"), res.getString("Password"), res.getString("Contact"), new File(res.getString("Image"))));
+                m.add(new User(res.getInt("ID"), res.getString("Name"), res.getString("Password"), res.getString("Contact"), new File(res.getString("Image"))));
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -119,6 +118,7 @@ public class CRUDOperations {
         }
         return b;
     }
+
     public ArrayList<TimeTable> fetchTimeTable() {
         ArrayList<TimeTable> t = new ArrayList<>();
         String sql = "select * from TimeTable";
@@ -128,7 +128,7 @@ public class CRUDOperations {
             res = pstmt.executeQuery();
 
             while (res.next()) {
-                t.add(new TimeTable(res.getInt("ID") ,res.getInt("Hall"), res.getInt("Buyer"), res.getString("Date")));
+                t.add(new TimeTable(res.getInt("ID"), res.getInt("Hall"), res.getInt("Buyer"), res.getString("Date")));
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -137,12 +137,13 @@ public class CRUDOperations {
         }
         return t;
     }
-    public boolean addbooking(User currentUser, MarriageHall m , String date) {
+
+    public boolean addbooking(User currentUser, MarriageHall m, String date) {
         boolean b = false;
         String sql = "insert into TimeTable(Hall, Buyer, Date) values ('"
                 + currentUser.getId() + "','"
                 + m.getId() + "','"
-                + date+ "')";
+                + date + "')";
         try {
             stmt = con_obj.createStatement();// to convert above string into compatible sql/database  query
             int res = stmt.executeUpdate(sql);// after excecuting above query the number of record effects is returned so if not 0 means rec is added           
@@ -154,8 +155,32 @@ public class CRUDOperations {
             System.out.println("aaa");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex); // catching exception in case of expcetion
-        }        
+        }
         return b;
     }
 
+    public boolean updateUser(User u) {
+        boolean b = false;
+        String sql = "Update User set (Name, Password, Contact, Image)=('"
+                + u.getName() + "','" + 
+                u.getPassword()+ "','"  +
+                u.getContact()+ "','" +
+                u.getImgP().getAbsolutePath() +
+                "') where ID='" + currentUser.getId() + "'";
+        try {
+            stmt = con_obj.createStatement();
+            int rs = stmt.executeUpdate(sql);
+            if (rs > 0) {
+                b = true;
+            } else {
+                b = false;
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return b;
+    }
 }
+
+

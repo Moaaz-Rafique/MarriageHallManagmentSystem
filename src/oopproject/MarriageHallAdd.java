@@ -26,6 +26,7 @@ public class MarriageHallAdd extends javax.swing.JFrame {
     public MarriageHallAdd() {
         initComponents();
         mH = new MarriageHall();
+        
     }
 
     /**

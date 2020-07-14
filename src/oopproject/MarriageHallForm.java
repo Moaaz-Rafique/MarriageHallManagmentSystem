@@ -305,6 +305,8 @@ public class MarriageHallForm extends javax.swing.JFrame {
                 System.out.println(mH.getId());
                 timeTable.add(new TimeTable(timeTable.size(), currentUser.getId(),mH.getId(), txtdate.getText()));  
                 JOptionPane.showMessageDialog(this, "Hall has been booked");
+                
+                //currentUser.getBookedMarriageHalls().add(currentUser.new BookedMarriageHalls(mH, txtdate.getText()));
             }
         } else {
             JOptionPane.showMessageDialog(this, "Please Login to book the Hall");

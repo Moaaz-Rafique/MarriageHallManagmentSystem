@@ -61,6 +61,7 @@ public class MainForm extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
+        
     }
 
     public static User getUser(int id) {
@@ -69,6 +70,7 @@ public class MainForm extends javax.swing.JFrame {
                 return user;
             }
         }
+        System.out.println(currentUser);
         System.out.println("No User found? " + id);
         return null;
     }
@@ -87,7 +89,7 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         CRUDOperations c = new CRUDOperations();
-        if(userData.isEmpty())    
+        if(userData.isEmpty())
             userData.addAll(c.fetchUser());
         if(tempMarriageHall.isEmpty())    
             tempMarriageHall.addAll(c.fetchNarriageHall());
