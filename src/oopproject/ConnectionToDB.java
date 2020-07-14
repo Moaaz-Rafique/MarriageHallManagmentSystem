@@ -15,7 +15,7 @@ public class ConnectionToDB {
             //JOptionPane.showMessageDialog(null, "Connected");
             
         }
-        catch(Exception ex)
+        catch(ClassNotFoundException | SQLException ex)
         {
             JOptionPane.showMessageDialog(null, ex);
             

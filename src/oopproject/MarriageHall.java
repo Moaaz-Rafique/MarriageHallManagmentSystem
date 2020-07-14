@@ -10,10 +10,11 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import static oopproject.MainForm.getUser;
 
 public class MarriageHall {
 
-    private String name, price, location, date;
+    private String name, price, location;
     private int id, capacityPeople;
     private ArrayList<String> dates = new ArrayList<>();
     private File imgP;
@@ -37,30 +38,25 @@ public class MarriageHall {
         this.capacityPeople = 0;
         this.contact = " ";
         this.location = " ";
-        this.date = "No date set";
         this.imgP = null;
         this.imgP = new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\login.png");
     }
 
-    public MarriageHall(String Name, String Price, int CapacityP,String Location,String contact, String D, File imgP) {
-
-        this.name = Name;
+    public MarriageHall(int id, String Name, String Price, int CapacityP,String Location,String contact, File imgP, int sId) {
+         this.name = Name;
         this.price = Price;
         this.capacityPeople = CapacityP;
         this.imgP = imgP;
         this.location = Location;
-        this.date = D;
         this.contact = contact;
         try {
             img = ImageIO.read(imgP);
         } catch (IOException ex) {
             Logger.getLogger(MarriageHall.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.dates.add(D);
-    }
-    public MarriageHall(int id, String Name, String Price, int CapacityP,String Location,String contact, String D, File imgP) {
-         this(Name,  Price,  CapacityP, Location, contact, D, imgP);
          this.id = id;
+         this.setSeller(getUser(sId));
+         this.seller.getMyMarriageHalls().add(this);
     }
 
     public void setImageFromFile(JLabel label) {
@@ -104,9 +100,6 @@ public class MarriageHall {
         return location;
     }
 
-    public String getDate() {
-        return date;
-    }
 
     public ArrayList<String> getDates() {
         return dates;
@@ -126,10 +119,6 @@ public class MarriageHall {
 
     public void setLocation(String Location) {
         this.location = Location;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public void setCapacityPeople(int capacityPeople) {

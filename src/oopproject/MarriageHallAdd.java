@@ -6,6 +6,9 @@
 package oopproject;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import static oopproject.MainForm.currentUser;
+import static oopproject.MainForm.login;
 import static oopproject.MainForm.setPanelMarriageHall1;
 import static oopproject.MainForm.tempMarriageHall;
 
@@ -19,6 +22,7 @@ public class MarriageHallAdd extends javax.swing.JFrame {
      * Creates new form MarriageHallForm
      */
     private MarriageHall mH;
+
     public MarriageHallAdd() {
         initComponents();
         mH = new MarriageHall();
@@ -53,7 +57,6 @@ public class MarriageHallAdd extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtLocation = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -208,22 +211,13 @@ public class MarriageHallAdd extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton3.setText("Back");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -235,8 +229,6 @@ public class MarriageHallAdd extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(416, 416, 416)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -279,42 +271,37 @@ public class MarriageHallAdd extends javax.swing.JFrame {
         new MainForm().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        new MainForm().setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void imageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMouseClicked
         // TODO add your handling code here:
 
         JFileChooser fc = new JFileChooser();
-        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {             
-            
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+
             mH.setImgP(fc.getSelectedFile());
-            
+
         }
         mH.setImageFromFile(image);
     }//GEN-LAST:event_imageMouseClicked
 
     private void addHallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHallActionPerformed
         // TODO add your handling code here:
-        setPanelMarriageHall1(name, price, capacity, image, mH);
-        mH.setName(name.getText());
-        mH.setPrice(price.getText());
-        mH.setCapacityPeople(Integer.parseInt(capacity.getText()));
-        mH.setContact(txtContact.getText());
-        mH.setLocation(txtLocation.getText());
-        tempMarriageHall.add(5,mH);
-        CRUDOperations c = new CRUDOperations();
-        c.addMarriageHall(mH);
-        //c.addUser(new User("name", "pass", "Seller", "contact",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\login.png")));
-        System.out.println(mH.getName());
-        System.out.println(mH.getPrice());
-        System.out.println(mH.getCapacityPeople());
-        System.out.println(mH.getLocation());
-        System.out.println(mH.getContact());
-        System.out.println(mH.getImgP());
+        if (login) {
+            setPanelMarriageHall1(name, price, capacity, image, mH);            
+            mH.setName(name.getText());
+            mH.setPrice(price.getText());
+            mH.setCapacityPeople(Integer.parseInt(capacity.getText()));
+            mH.setContact(txtContact.getText());
+            mH.setLocation(txtLocation.getText());
+            CRUDOperations c = new CRUDOperations();
+            c.addMarriageHall(mH);
+            tempMarriageHall.add(mH);
+            JOptionPane.showMessageDialog(this, "Marriage Hall Added");
+            currentUser.getMyMarriageHalls().add(mH);
+            mH.setSeller(currentUser);
+            //c.addUser(new User("name", "pass", "Seller", "contact",new File("C:\\Users\\s\\Documents\\NetBeansProjects\\OOPProject\\src\\Images\\login.png")));
+        } else {
+            JOptionPane.showMessageDialog(this, "Please Login to Add the Hall");
+        }
     }//GEN-LAST:event_addHallActionPerformed
 
     private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
@@ -373,7 +360,6 @@ public class MarriageHallAdd extends javax.swing.JFrame {
     private org.jdatepicker.impl.DateComponentFormatter dateComponentFormatter1;
     private javax.swing.JLabel image;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil1;
     private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil2;
     private javax.swing.JLabel jLabel1;
@@ -391,5 +377,4 @@ public class MarriageHallAdd extends javax.swing.JFrame {
     private javax.swing.JTextField txtLocation;
     // End of variables declaration//GEN-END:variables
 
-    
 }

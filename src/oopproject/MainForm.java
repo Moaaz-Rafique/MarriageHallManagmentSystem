@@ -5,18 +5,12 @@ package oopproject;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import java.awt.Image;
-import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-
 
 /**
  *
@@ -27,63 +21,88 @@ public class MainForm extends javax.swing.JFrame {
     public static ArrayList<User> userData = new ArrayList<User>();
     public static User currentUser;
     public static ArrayList<MarriageHall> tempMarriageHall = new ArrayList<>();
+    public static ArrayList<TimeTable> timeTable = new ArrayList<>();
     public static int page = 0;
     public static boolean login = false;
 
     /**
-     * Creates new form MainForm
+     * Sets the panel icon
+     *
+     * @param name
+     * @param price
+     * @param capacity
+     * @param image
+     * @param mH
      */
-    public static void setPanelMarriageHall(JLabel name, JLabel price, JLabel capacity, JLabel image,MarriageHall mH){
-        try{
+    public static void setPanelMarriageHall(JLabel name, JLabel price, JLabel capacity, JLabel image, MarriageHall mH) {
+        try {
             name.setText(mH.getName());
-        
-        price.setText(mH.getPrice());
-        capacity.setText(Integer.toString(mH.getCapacityPeople()));
-        image.setIcon(new ImageIcon(mH.getImg().getScaledInstance(image.getWidth(), image.getHeight(),
-            Image.SCALE_AREA_AVERAGING)));
-        
-        }
-        catch(Exception e){
+
+            price.setText(mH.getPrice());
+            capacity.setText(Integer.toString(mH.getCapacityPeople()));
+            image.setIcon(new ImageIcon(mH.getImg().getScaledInstance(image.getWidth(), image.getHeight(),
+                    Image.SCALE_AREA_AVERAGING)));
+
+        } catch (Exception e) {
             System.out.println(mH.getName());
             System.out.println(e);
         }
     }
-    public static void setPanelMarriageHall1(JTextField name, JTextField price, JTextField capacity, JLabel image,MarriageHall mH){
-        try{
+
+    public static void setPanelMarriageHall1(JTextField name, JTextField price, JTextField capacity, JLabel image, MarriageHall mH) {
+        try {
             mH.setName(name.getText());
-        
-        mH.setPrice(price.getText());
-        mH.setCapacityPeople(Integer.parseInt(capacity.getText()));
-        image.setIcon(new ImageIcon(mH.getImg().getScaledInstance(image.getWidth(), image.getHeight(),
-            Image.SCALE_AREA_AVERAGING)));
-        
-        }
-        catch(Exception e){
+
+            mH.setPrice(price.getText());
+            mH.setCapacityPeople(Integer.parseInt(capacity.getText()));
+            image.setIcon(new ImageIcon(mH.getImg().getScaledInstance(image.getWidth(), image.getHeight(),
+                    Image.SCALE_AREA_AVERAGING)));
+
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
+
+    public static User getUser(int id) {
+        for (User user : userData) {
+            if (user.getId() == id) {
+                return user;
+            }
+        }
+        System.out.println("No User found? " + id);
+        return null;
+    }
+
+    public static MarriageHall getMarriageHall(int id) {
+        for (MarriageHall mH : tempMarriageHall) {
+            if (mH.getId() == id) {
+                return mH;
+            }
+        }
+        System.out.println("No Marriage Hall found? " + id);
+        return null;
+    }
+
     public MainForm() {
         initComponents();
         this.setResizable(false);
         CRUDOperations c = new CRUDOperations();
-        
-        tempMarriageHall.addAll(c.fetchNarriageHall());
-        
-        tempMarriageHall.add(new MarriageHall());
-        userData.addAll(c.fetchUser());
-        
-        setPanelMarriageHall(name, price, capacity, imgMH, tempMarriageHall.get(0+page));
-        setPanelMarriageHall(name1, price1, capacity1, imgMH1, tempMarriageHall.get(1+page));
-        setPanelMarriageHall(name4, price4, capacity4, imgMH3, tempMarriageHall.get(2+page));   
-        setPanelMarriageHall(name9, price9, capacity9, imgMH6, tempMarriageHall.get(3+page));     
-        setPanelMarriageHall(name12, price12, capacity12, imgMH9, tempMarriageHall.get(4+page));
-        setPanelMarriageHall(name13, price13, capacity13, imgMH10, tempMarriageHall.get(5+page));
-        buttonGroup1.add(jRadioButton1);
-        buttonGroup1.add(jRadioButton2);
-        buttonGroup1.add(jRadioButton3);
-        
-        
+        if(userData.isEmpty())    
+            userData.addAll(c.fetchUser());
+        if(tempMarriageHall.isEmpty())    
+            tempMarriageHall.addAll(c.fetchNarriageHall());
+        if(timeTable.isEmpty())
+            timeTable.addAll(c.fetchTimeTable());
+        nextPage2.setText(Integer.toString((page / 3) + 1));
+        setPanelMarriageHall(name, price, capacity, imgMH, tempMarriageHall.get(0 + page));
+        setPanelMarriageHall(name1, price1, capacity1, imgMH1, tempMarriageHall.get(3 + page));
+        setPanelMarriageHall(name4, price4, capacity4, imgMH3, tempMarriageHall.get(1 + page));
+        setPanelMarriageHall(name9, price9, capacity9, imgMH6, tempMarriageHall.get(4 + page));
+        setPanelMarriageHall(name12, price12, capacity12, imgMH9, tempMarriageHall.get(2 + page));
+        setPanelMarriageHall(name13, price13, capacity13, imgMH10, tempMarriageHall.get(5 + page));
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,17 +112,9 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         pnlMarriageHall = new javax.swing.JPanel();
         imgMH = new javax.swing.JLabel();
@@ -155,8 +166,8 @@ public class MainForm extends javax.swing.JFrame {
         price13 = new javax.swing.JLabel();
         name13 = new javax.swing.JLabel();
         capacity13 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jComboBox3 = new javax.swing.JComboBox();
+        nextPage2 = new javax.swing.JButton();
+        DashBoard = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
@@ -176,32 +187,6 @@ public class MainForm extends javax.swing.JFrame {
         jLabel1.setName(""); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButton1.setText("Search");
-        jButton1.setPreferredSize(new java.awt.Dimension(73, 17));
-
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Price Range 1", "Price Range 2", "Price Range 3", "Price Range 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Capacity Range 1", "Capacity Range 2", "Capacity Range 3", "Capacity Range 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-
-        jRadioButton1.setText("jRadioButton1");
-
-        jRadioButton2.setText("jRadioButton2");
-
-        jRadioButton3.setText("jRadioButton3");
 
         jPanel3.setBackground(new java.awt.Color(250, 250, 250));
 
@@ -262,8 +247,18 @@ public class MainForm extends javax.swing.JFrame {
         );
 
         nextPage.setText("Previous");
+        nextPage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextPageActionPerformed(evt);
+            }
+        });
 
         nextPage1.setText("Next");
+        nextPage1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextPage1ActionPerformed(evt);
+            }
+        });
 
         pnlMarriageHall1.setBackground(new java.awt.Color(204, 255, 255));
         pnlMarriageHall1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -549,6 +544,9 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        nextPage2.setText(Integer.toString(page+1)
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -558,6 +556,8 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(nextPage, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(175, 175, 175)
+                        .addComponent(nextPage2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(nextPage1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -570,7 +570,7 @@ public class MainForm extends javax.swing.JFrame {
                             .addComponent(pnlMarriageHall6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnlMarriageHall10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnlMarriageHall1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -590,18 +590,17 @@ public class MainForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nextPage, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nextPage1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nextPage1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nextPage2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton2.setText("Home");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        DashBoard.setText("Dashboard");
+        DashBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                DashBoardActionPerformed(evt);
             }
         });
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dates Range 1", "Dates Range 2", "Dates Range 3", "Dates Range 4" }));
 
         jButton3.setText("Sign Up");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -624,49 +623,20 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(DashBoard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, 0, 139, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox3))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton3))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(DashBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -708,15 +678,16 @@ public class MainForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void DashBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashBoardActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        new MainForm().setVisible(true);               
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if(login){
+            dispose();
+            new Dashboard().setVisible(true);
+        }else {
+            JOptionPane.showMessageDialog(this, "Please Login View Dashboard");
+        }
+        
+    }//GEN-LAST:event_DashBoardActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -727,7 +698,7 @@ public class MainForm extends javax.swing.JFrame {
     private void pnlMarriageHallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMarriageHallMouseClicked
         // TODO add your handling code here:
         dispose();
-        new MarriageHallForm(tempMarriageHall.get(0)).setVisible(true);
+        new MarriageHallForm(tempMarriageHall.get(0 + page)).setVisible(true);
     }//GEN-LAST:event_pnlMarriageHallMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -736,40 +707,85 @@ public class MainForm extends javax.swing.JFrame {
         new MarriageHallAdd().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
     private void pnlMarriageHall1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMarriageHall1MouseClicked
         // TODO add your handling code here:
         dispose();
-        new MarriageHallForm(tempMarriageHall.get(1+page)).setVisible(true);
-        
+        new MarriageHallForm(tempMarriageHall.get(3 + page)).setVisible(true);
+
     }//GEN-LAST:event_pnlMarriageHall1MouseClicked
 
     private void pnlMarriageHall3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMarriageHall3MouseClicked
         // TODO add your handling code here:
         dispose();
-        new MarriageHallForm(tempMarriageHall.get(2+page)).setVisible(true);
+        new MarriageHallForm(tempMarriageHall.get(1 + page)).setVisible(true);
     }//GEN-LAST:event_pnlMarriageHall3MouseClicked
 
     private void pnlMarriageHall6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMarriageHall6MouseClicked
         // TODO add your handling code here:
         dispose();
-        new MarriageHallForm(tempMarriageHall.get(3+page)).setVisible(true);
+        new MarriageHallForm(tempMarriageHall.get(4 + page)).setVisible(true);
     }//GEN-LAST:event_pnlMarriageHall6MouseClicked
 
     private void pnlMarriageHall9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMarriageHall9MouseClicked
         // TODO add your handling code here:
         dispose();
-        new MarriageHallForm(tempMarriageHall.get(4+page)).setVisible(true);
+        new MarriageHallForm(tempMarriageHall.get(2 + page)).setVisible(true);
     }//GEN-LAST:event_pnlMarriageHall9MouseClicked
 
     private void pnlMarriageHall10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMarriageHall10MouseClicked
         // TODO add your handling code here:
         dispose();
-        new MarriageHallForm(tempMarriageHall.get(5+page)).setVisible(true);
+        new MarriageHallForm(tempMarriageHall.get(5 + page)).setVisible(true);
     }//GEN-LAST:event_pnlMarriageHall10MouseClicked
+
+    private void nextPage1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextPage1ActionPerformed
+        // TODO add your handling code here:
+
+        if (tempMarriageHall.size() - 9 > page) {
+            page += 3;
+            
+        } else if ((tempMarriageHall.size() % 3 != 0) && (page < tempMarriageHall.size()-6)) {
+            switch (tempMarriageHall.size() % 3) {
+                case 0:
+                    break;                   
+                case 1:
+                    page++;
+                    break;
+                case 2:
+                    page +=2;
+            }
+        } else {
+            return;
+        }
+        try {
+                setPanelMarriageHall(name, price, capacity, imgMH, tempMarriageHall.get(0 + page));
+                setPanelMarriageHall(name4, price4, capacity4, imgMH3, tempMarriageHall.get(1 + page));
+                setPanelMarriageHall(name12, price12, capacity12, imgMH9, tempMarriageHall.get(2 + page));
+                setPanelMarriageHall(name1, price1, capacity1, imgMH1, tempMarriageHall.get(3 + page));
+                setPanelMarriageHall(name9, price9, capacity9, imgMH6, tempMarriageHall.get(4 + page));
+                setPanelMarriageHall(name13, price13, capacity13, imgMH10, tempMarriageHall.get(5 + page));
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            nextPage2.setText(Integer.toString((page / 3) + 1));
+    }//GEN-LAST:event_nextPage1ActionPerformed
+
+    private void nextPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextPageActionPerformed
+        // TODO add your handling code here:
+        if (page > 0) {
+            page -= 3;
+        } else {
+            return;
+        }
+
+        nextPage2.setText(Integer.toString((page / 3) + 1));
+        setPanelMarriageHall(name, price, capacity, imgMH, tempMarriageHall.get(0 + page));
+        setPanelMarriageHall(name4, price4, capacity4, imgMH3, tempMarriageHall.get(1 + page));
+        setPanelMarriageHall(name12, price12, capacity12, imgMH9, tempMarriageHall.get(2 + page));
+        setPanelMarriageHall(name1, price1, capacity1, imgMH1, tempMarriageHall.get(3 + page));
+        setPanelMarriageHall(name9, price9, capacity9, imgMH6, tempMarriageHall.get(4 + page));
+        setPanelMarriageHall(name13, price13, capacity13, imgMH10, tempMarriageHall.get(5 + page));
+    }//GEN-LAST:event_nextPageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -801,15 +817,14 @@ public class MainForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainForm().setVisible(true);
-                
 
             }
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton DashBoard;
     private javax.swing.JLabel capacity;
     private javax.swing.JLabel capacity1;
     private javax.swing.JLabel capacity12;
@@ -822,13 +837,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JLabel imgMH3;
     private javax.swing.JLabel imgMH6;
     private javax.swing.JLabel imgMH9;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel18;
@@ -851,10 +861,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel name;
     private javax.swing.JLabel name1;
     private javax.swing.JLabel name12;
@@ -863,6 +869,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JLabel name9;
     private javax.swing.JButton nextPage;
     private javax.swing.JButton nextPage1;
+    private javax.swing.JButton nextPage2;
     private javax.swing.JPanel pnlMarriageHall;
     private javax.swing.JPanel pnlMarriageHall1;
     private javax.swing.JPanel pnlMarriageHall10;

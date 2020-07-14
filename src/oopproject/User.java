@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -18,7 +19,35 @@ public class User {
     private String contact;
     private File imgP;
     private BufferedImage img = null;
+    private ArrayList <MarriageHall> myMarriageHalls= new ArrayList<>();
+    class BookedMarriageHalls{
+        MarriageHall mH;
+        String date;
 
+        public BookedMarriageHalls(MarriageHall mH, String date) {
+            this.mH = mH;
+            this.date = date;
+        }
+
+        public MarriageHall getmH() {
+            return mH;
+        }
+
+        public void setmH(MarriageHall mH) {
+            this.mH = mH;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+        
+    }
+    
+    private ArrayList <BookedMarriageHalls> bookedMarriageHalls= new ArrayList<>();
     public User() {
         
     }
@@ -94,6 +123,23 @@ public class User {
     public void setImg(BufferedImage img) {
         this.img = img;
     }
+
+    public ArrayList<BookedMarriageHalls> getBookedMarriageHalls() {
+        return bookedMarriageHalls;
+    }
+
+    public void setBookedMarriageHalls(ArrayList<BookedMarriageHalls> bookedMarriageHalls) {
+        this.bookedMarriageHalls = bookedMarriageHalls;
+    }
+
+    public ArrayList<MarriageHall> getMyMarriageHalls() {
+        return myMarriageHalls;
+    }
+
+    public void setMyMarriageHalls(ArrayList<MarriageHall> myMarriageHalls) {
+        this.myMarriageHalls = myMarriageHalls;
+    }
+    
     
     public void setImageFromFile(JLabel label) {
         try {

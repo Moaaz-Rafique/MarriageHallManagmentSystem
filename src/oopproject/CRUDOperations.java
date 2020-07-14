@@ -9,6 +9,8 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static oopproject.MainForm.currentUser;
+import static oopproject.MainForm.userData;
 
 /**
  *
@@ -33,11 +35,13 @@ public class CRUDOperations {
 
             while (res.next()) {
                 m.add(new MarriageHall(res.getInt("ID") ,res.getString("Name"), res.getString("Price"), res.getInt("Capacity"),
-                        res.getString("Location"), res.getString("Contact"), res.getString("Date"), new File(res.getString("Image"))));
+                        res.getString("Location"), res.getString("Contact"),  new File(res.getString("Image")), res.getInt("Seller")));
+                //m.get(m.size()-1).setSeller(getUser(res.getInt("Seller")));
+                //getUser(res.getInt("Seller")).getMyMarriageHalls().add(m.get(m.size()-1));
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
-            System.out.println("Error");
+            System.out.println("Error in fetch MarriageHall");
         }
         return m;
     }
@@ -46,14 +50,14 @@ public class CRUDOperations {
         boolean b = false;
         //sql Syntax of inserting data
         //insert into Table_Name (col1, col2, col3,... col_n) values (var1, var2,var3,..... , var_n)
-        String sql = "insert into Hall(Name,Price,Capacity,Location,Contact,Date, Image) values ('"
+        String sql = "insert into Hall(Name,Price,Capacity,Location,Contact, Image, Seller) values ('"
                 + m.getName() + "','"
                 + m.getPrice() + "','"
                 + m.getCapacityPeople() + "','"
                 + m.getLocation() + "','"
                 + m.getContact() + "','"
-                + m.getDate() + "','"
-                + m.getImgP().getAbsolutePath() + "')";
+                + m.getImgP().getAbsolutePath() + "','"
+                + currentUser.getId()+"')";
         try {
             stmt = con_obj.createStatement();// to convert above string into compatible sql/database  query
             
@@ -85,16 +89,17 @@ public class CRUDOperations {
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
-            System.out.println("Error");
+            System.out.println("Error in fetch user");
         }
         return m;
     }
 
     public boolean addUser(User u) {
+        u.setId(userData.size());
         boolean b = false;
         //sql Syntax of inserting data
         //insert into Table_Name (col1, col2, col3,... col_n) values (var1, var2,var3,..... , var_n)
-        String sql = "insert into User(Name,Password,Type,Contact, Image) values ('"
+        String sql = "insert into User(Name,Password,Contact, Image) values ('"
                 + u.getName() + "','"
                 + u.getPassword() + "','"
                 + u.getContact() + "','"
@@ -114,7 +119,24 @@ public class CRUDOperations {
         }
         return b;
     }
+    public ArrayList<TimeTable> fetchTimeTable() {
+        ArrayList<TimeTable> t = new ArrayList<>();
+        String sql = "select * from TimeTable";
 
+        try {
+            pstmt = con_obj.prepareStatement(sql);
+            res = pstmt.executeQuery();
+
+            while (res.next()) {
+                t.add(new TimeTable(res.getInt("ID") ,res.getInt("Hall"), res.getInt("Buyer"), res.getString("Date")));
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            System.out.println(ex);
+            System.out.println("Error in fetching timetable");
+        }
+        return t;
+    }
     public boolean addbooking(User currentUser, MarriageHall m , String date) {
         boolean b = false;
         String sql = "insert into TimeTable(Hall, Buyer, Date) values ('"

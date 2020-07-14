@@ -7,7 +7,8 @@ package oopproject;
 
 import javax.swing.ButtonModel;
 import javax.swing.JFileChooser;
-import static oopproject.MainForm.userData;
+import javax.swing.JOptionPane;
+import static oopproject.MainForm.*;
 
 /**
  *
@@ -266,9 +267,14 @@ public class SignUpForm extends javax.swing.JFrame {
         System.out.println(user.getPassword());
         System.out.println(user.getContact());
         System.out.println(user.getUserType());
-        userData.add(user);
         CRUDOperations c = new CRUDOperations();
         c.addUser(user);
+        userData.add(user);
+        JOptionPane.showMessageDialog(this, "You have signed Up successfully");
+        currentUser = user;
+        login = true;
+        dispose();
+        new MainForm().setVisible(true);
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     /**
